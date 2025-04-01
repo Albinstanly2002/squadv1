@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squad Gaming Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #8e44ad;
+            --dark: #1a1a2e;
+            --light: #ecf0f1;
+            --accent: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body, h1, h2, h3, p, a, .btn {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease;
+        }
+        
+        header:hover {
+            background: var(--primary);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('hero_background.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-content h1, .hero-content p {
+            animation: fadeIn 2s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: bold;
+            color: var(--light);
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 22px;
+            color: #ddd;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid #fff;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--accent);
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+        
+        /* About Section */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2, .section-title p {
+            animation: slideIn 1.5s ease-in-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #aaa;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+        
+        .about-image {
+            display: none;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Gaming Setups Section */
+        .setups {
+            position: relative;
+            overflow: hidden;
+            background: url('setups_background.jpg') no-repeat center center/cover;
+            color: #fff;
+        }
+        
+        .setups video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .setup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .setup-card {
+            background: #1a1a2e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .setup-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--accent);
+        }
+        
+        .setup-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .setup-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .setup-card:hover .setup-img img {
+            transform: scale(1.1);
+        }
+        
+        .setup-info {
+            padding: 20px;
+        }
+        
+        .setup-info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .setup-info p {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+        
+        .setup-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #777;
+            font-size: 14px;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            padding: 80px 0;
+        }
+        
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #000428, #004e92);
+            opacity: 0.9;
+            z-index: -1;
+        }
+        
+        .pricing-grid {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .pricing-card {
+            flex: 1;
+            background: rgba(26, 26, 46, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            min-width: 300px;
+            max-width: 400px;
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            margin: 10px 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 15px 0;
+            padding: 0;
+        }
+        
+        .pricing-features li {
+            margin: 8px 0;
+            font-size: 0.9rem;
+        }
+        
+        .pricing-card .btn {
+            background: linear-gradient(45deg, #ff00ea, #00fffb);
+            border: none;
+            color: white;
+            padding: 10px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+        
+        .pricing-card .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        .pricing-info {
+            margin-top: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 0, 234, 0.1), rgba(0, 255, 251, 0.1));
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .pricing-info h3 {
+            color: #00fffb;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(0, 255, 251, 0.5);
+        }
+        
+        .pricing-info ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .pricing-info li {
+            color: #fff;
+            font-size: 1rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-info li:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Booking Section */
+        .booking {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .booking::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('book.jpg') no-repeat center center/cover;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        .booking-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        .contact-info i {
+            color: var(--accent);
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px var(--accent);
+        }
+        
+        .map {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Footer */
+        footer {
+            background: #0f0f1a;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        footer p {
+            color: #777;
+        }
+        
+        /* Admin Panel Styles */
+        .admin-panel {
+            display: none;
+            padding: 50px 0;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .admin-card {
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-card h3 {
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #2d2d42;
+            color: #ccc;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        tr:hover {
+            background-color: #2d2d42;
+        }
+        
+        .action-btn {
+            padding: 5px 10px;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        
+        .edit-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--dark);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: all 0.5s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+                color: white;
+                font-size: 24px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .pricing-grid {
+                flex-direction: column;
+            }
+            
+            .pricing-card {
+                width: 100%;
+            }
+        }
+
+        .second-page {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .second-page video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        #about {
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #about video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        #about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        #about .section-title h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+                         0 0 40px rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        #about .section-title p {
+            font-size: 1.2rem;
+            color: #00fffb;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px rgba(0, 255, 251, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            color: #ff00ea;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(255, 0, 234, 0.5);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 25px;
+            line-height: 1.8;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        #about .btn {
+            background: linear-gradient(45deg, #ff00ea, #00fffb);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(255, 0, 234, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        #about .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(255, 0, 234, 0.5);
+        }
+
+        #setup option {
+            background: #1a1a2e;
+            color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Squad <span>Gaming</span></a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#setups">Setups</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#booking">Book Now</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" id="admin-login">Admin</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <video autoplay muted loop>
+            <source src="vid.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Ultimate Gaming Experience</h1>
+                <p>Play the latest games on high-end setups with your friends at Squad Gaming Center</p>
+                <a href="#booking" class="btn">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <video autoplay muted loop>
+            <source src="vid3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="container">
+            <div class="section-title">
+                <h2>About Squad Gaming</h2>
+                <p>Your premier destination for an unforgettable gaming experience</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Welcome to Squad Gaming Center</h3>
+                    <p>We offer state-of-the-art gaming setups including PS5 consoles with 4K displays and a dedicated PS4 racing simulator with full steering wheel and pedal setup.</p>
+                    <p>Our gaming center is designed to provide the ultimate experience for gamers of all levels. Whether you're a casual player or a competitive gamer, we have the perfect setup for you.</p>
+                    <p>Gather your squad and enjoy hours of gaming fun in our comfortable and immersive environment.</p>
+                    <a href="#setups" class="btn">View Our Setups</a>
+                </div>
+                <div class="about-image">
+                    <!-- Replace with your image -->
+                    <img src="YOUR_ABOUT_IMAGE.jpg" alt="Squad Gaming Center">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gaming Setups Section -->
+    <section class="section setups" id="setups">
+        <video autoplay muted loop>
+            <source src="vid2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Gaming Setups</h2>
+                <p>Premium gaming equipment for the best experience</p>
+            </div>
+            <div class="setup-grid">
+                <!-- PS5 Setup -->
+                <div class="setup-card">
+                    <div class="setup-img">
+                        <img src="ps5.jpg" alt="PS5 Setup">
+                    </div>
+                    <div class="setup-info">
+                        <h3>PS5 Premium Setup</h3>
+                        <p>Experience next-gen gaming with our high-end PS5 setup featuring 4K HDR display and premium sound system.</p>
+                        <div class="setup-meta">
+                            <span><i class="fas fa-users"></i> 1-4 Players</span>
+                            <span><i class="fas fa-gamepad"></i> 50+ Games</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Racing Simulator -->
+                <div class="setup-card">
+                    <div class="setup-img">
+                        <img src="car.jpg" alt="Racing Simulator">
+                    </div>
+                    <div class="setup-info">
+                        <h3>Racing Simulator</h3>
+                        <p>Full racing cockpit with steering wheel, pedals, and gear shift for the most realistic racing experience.</p>
+                        <div class="setup-meta">
+                            <span><i class="fas fa-users"></i> 1 Player</span>
+                            <span><i class="fas fa-gamepad"></i> 10+ Racing Games</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pool Table -->
+                <div class="setup-card">
+                    <div class="setup-img">
+                        <img src="pooltable.jpg" alt="Pool Table">
+                    </div>
+                    <div class="setup-info">
+                        <h3>Pool Table</h3>
+                        <p>Take a break from digital gaming and enjoy some classic pool with friends.</p>
+                        <div class="setup-meta">
+                            <span><i class="fas fa-users"></i> 2-4 Players</span>
+                            <span><i class="fas fa-clock"></i> ₹150/hour</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Pricing</h2>
+                <p>Affordable rates for premium gaming experience</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- Squad Package -->
+                <div class="pricing-card">
+                    <h3>Squad Package</h3>
+                    <div class="price">₹400 <span>per hour</span></div>
+                    <ul class="pricing-features">
+                        <li>Squad of 4 players</li>
+                        <li>Access to Gaming Setups:</li>
+                        <li>- One PS5 Station at a time</li>
+                        <li>- Racing Simulator</li>
+                        <li>- Pool Table</li>
+                        <li>Switch between available setups</li>
+                        <li>Premium Gaming Gear</li>
+                        <li>50+ Latest Games</li>
+                    </ul>
+                    <a href="#booking" class="btn">Book Now</a>
+                </div>
+
+                <!-- Individual/Small Group -->
+                <div class="pricing-card">
+                    <h3>Individual/Small Group</h3>
+                    <div class="price">₹120 <span>per person/hour</span></div>
+                    <ul class="pricing-features">
+                        <li>1-3 Players</li>
+                        <li>Choose Your Setup:</li>
+                        <li>- PS5 Station</li>
+                        <li>- Racing Simulator</li>
+                        <li>- Pool Table</li>
+                        <li>Premium Controllers</li>
+                        <li>Premium Headsets</li>
+                        <li>50+ Latest Games</li>
+                    </ul>
+                    <a href="#booking" class="btn">Book Now</a>
+                </div>
+
+                <!-- Device Specific -->
+                <div class="pricing-card">
+                    <h3>Device Specific Rates</h3>
+                    <div class="price">₹150 <span>per hour</span></div>
+                    <ul class="pricing-features">
+                        <li>PS5: Up to 4 Players (₹400/squad)</li>
+                        <li>Racing: 1 Player Only</li>
+                        <li>Pool: Up to 4 Players (₹400/squad)</li>
+                        <li>Professional Equipment</li>
+                        <li>Premium Experience</li>
+                        <li>Flexible Booking Options</li>
+                    </ul>
+                    <a href="#booking" class="btn">Book Now</a>
+                </div>
+            </div>
+            
+            <!-- Additional Info -->
+            <div class="pricing-info">
+                <h3>Important Information</h3>
+                <ul>
+                    <li>Squad (4 players) - ₹400/hour:</li>
+                    <li>- Can use one PS5 station at a time</li>
+                    <li>- Can access racing simulator or pool table when available</li>
+                    <li>Individual rates: ₹120 per person/hour (1-3 players)</li>
+                    <li>Operating Hours: 10:00 AM - 11:00 PM Daily</li>
+                    <li>Two PS5 stations available (one per squad)</li>
+                    <li>Advance booking recommended</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="section booking" id="booking">
+        <div class="container">
+            <div class="section-title">
+                <h2>Book Your Session</h2>
+                <p>Reserve your gaming setup in advance</p>
+            </div>
+            <div class="booking-form">
+                <form id="bookingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="setup">Select Booking Type</label>
+                            <select id="setup" class="form-control" required>
+                                <option value="">-- Select --</option>
+                                <option value="squad">Squad Package (4 Players - One PS5 + Other Setups) - ₹400/hr</option>
+                                <option value="individual">Individual/Small Group (1-3 Players) - ₹120/person/hr</option>
+                                <option value="ps5_specific">PS5 Only (Up to 4 Players) - ₹400/squad/hr</option>
+                                <option value="racing">Racing Simulator (1 Player) - ₹150/hr</option>
+                                <option value="pool">Pool Table (Up to 4 Players) - ₹400/squad/hr</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="players">Number of Players</label>
+                            <select id="players" class="form-control" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Booking Date</label>
+                            <input type="date" id="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time Slot</label>
+                            <select id="time" class="form-control" required>
+                                <option value="">-- Select --</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                                <option value="18:00">6:00 PM</option>
+                                <option value="20:00">8:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="duration">Duration (hours)</label>
+                        <select id="duration" class="form-control" required>
+                            <option value="1">1 hour</option>
+                            <option value="2">2 hours</option>
+                            <option value="3">3 hours</option>
+                            <option value="4">4 hours</option>
+                        </select>
+                    </div>
+                    
+                    <button style="background-color: rgb(20, 20, 87);" type="submit" class="btn" style="width: 100%;">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Visit us or get in touch for any inquiries</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Squad Gaming Center</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Gaming Street, City, State - 560001</p>
+                    <p><i class="fas fa-phone"></i> +91 9876543210</p>
+                    <p><i class="fas fa-envelope"></i> info@squadgaming.com</p>
+                    <p><i class="fas fa-clock"></i> Open Daily: 10:00 AM - 10:00 PM</p>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="map">
+                    <!-- Replace with your Google Maps embed code -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.123456789012!2d77.12345678901234!3d12.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDA3JzI0LjQiTiA3N8KwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Squad Gaming Center. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Admin Panel (Hidden by default) -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="container">
+            <div class="admin-header">
+                <h2>Admin Dashboard</h2>
+                <button id="logout-btn" class="btn">Logout</button>
+            </div>
+            
+            <div class="admin-card">
+                <h3>Today's Bookings</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Setup</th>
+                            <th>Date/Time</th>
+                            <th>Duration</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample booking data - in real app this would come from database -->
+                        <tr>
+                            <td>#1001</td>
+                            <td>Rahul Sharma</td>
+                            <td>PS5 Team</td>
+                            <td>15 Oct, 2:00 PM</td>
+                            <td>2 hours</td>
+                            <td>₹400</td>
+                            <td>Confirmed</td>
+                            <td>
+                                <button class="action-btn edit-btn">Edit</button>
+                                <button class="action-btn delete-btn">Cancel</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#1002</td>
+                            <td>Priya Patel</td>
+                            <td>Racing Sim</td>
+                            <td>15 Oct, 4:00 PM</td>
+                            <td>1 hour</td>
+                            <td>₹150</td>
+                            <td>Confirmed</td>
+                            <td>
+                                <button class="action-btn edit-btn">Edit</button>
+                                <button class="action-btn delete-btn">Cancel</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="admin-card">
+                <h3>Manage Pricing</h3>
+                <form id="pricingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>PS5 Team (4 players)</label>
+                            <input type="number" class="form-control" value="400">
+                        </div>
+                        <div class="form-group">
+                            <label>PS5 Single Player</label>
+                            <input type="number" class="form-control" value="120">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Racing Simulator</label>
+                            <input type="number" class="form-control" value="150">
+                        </div>
+                        <div class="form-group">
+                            <label>Pool Table</label>
+                            <input type="number" class="form-control" value="150">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Update Prices</button>
+                </form>
+            </div>
+            
+            <div class="admin-card">
+                <h3>Setup Availability</h3>
+                <form id="availabilityForm">
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" checked> PS5 Setup 1 - Available
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" checked> PS5 Setup 2 - Available
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" checked> Racing Simulator - Available
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" checked> Pool Table - Available
+                        </label>
+                    </div>
+                    <button type="submit" class="btn">Update Availability</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // Admin Panel Toggle
+        const adminLogin = document.getElementById('admin-login');
+        const adminPanel = document.getElementById('adminPanel');
+        const logoutBtn = document.getElementById('logout-btn');
+        
+        adminLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // In a real app, you would have proper authentication
+            const password = prompt('Enter admin password:');
+            if (password === 'squad123') { // Change this to a secure password
+                adminPanel.style.display = 'block';
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } else {
+                alert('Incorrect password!');
+            }
+        });
+        
+        logoutBtn.addEventListener('click', () => {
+            adminPanel.style.display = 'none';
+        });
+        
+        // Booking Form Submission
+        const bookingForm = document.getElementById('bookingForm');
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const setup = document.getElementById('setup').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            
+            // In a real app, you would send this data to a server
+            alert(`Booking request received!\n\nName: ${name}\nSetup: ${setup}\nDate: ${date}\nTime: ${time}\n\nWe'll contact you to confirm.`);
+            
+            // Reset form
+            bookingForm.reset();
+        });
+        
+        // Update players dropdown based on setup selection
+        const setupSelect = document.getElementById('setup');
+        const playersSelect = document.getElementById('players');
+        
+        setupSelect.addEventListener('change', () => {
+            if (setupSelect.value === 'ps5_team') {
+                playersSelect.innerHTML = `
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4" selected>4</option>
+                `;
+            } else if (setupSelect.value === 'racing' || setupSelect.value === 'ps5_single') {
+                playersSelect.innerHTML = '<option value="1" selected>1</option>';
+            } else {
+                playersSelect.innerHTML = `
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                `;
+            }
+        });
+        
+        // Admin Form Submissions (sample)
+        document.getElementById('pricingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Prices updated successfully!');
+        });
+        
+        document.getElementById('availabilityForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Availability updated successfully!');
+        });
+        
+        // Set minimum date to today for booking
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').min = today;
+    </script>
+</body>
+</html>
