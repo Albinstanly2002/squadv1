@@ -2826,7 +2826,8 @@
                 const response = await fetch(`${API_BASE_URL}/bookings/${bookingId}`, {
                     method: 'DELETE',
                     headers: {
-                        'Authorization': token
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     }
                 });
 
@@ -2862,7 +2863,7 @@
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': token
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
                         status: 'cancelled'
@@ -2935,7 +2936,7 @@
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': token
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({ status: 'cancelled' })
                 });
