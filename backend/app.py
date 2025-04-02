@@ -17,12 +17,24 @@ load_dotenv()
 app = Flask(__name__, static_folder='../', static_url_path='')
 CORS(app)
 
-# Get environment variables with error handling
-FIREBASE_CREDENTIALS_PATH = os.getenv('FIREBASE_CREDENTIALS_PATH')
-JWT_SECRET = os.getenv('JWT_SECRET')
-ADMIN_USERNAME = os.getenv('ADMIN_USERNAME')
-ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
+firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
 
+if firebase_credentials:
+    cred_dict = json.loads(firebase_credentials)  # Convert string back to JSON
+    cred = credentials.Certificate(cred_dict)  # Load as Firebase credentials
+    initialize_app(cred)
+else:
+    raise FileNotFoundError("Firebase credentials not found in environment variables")
+
+JWT_SECRET = os.getenv("JWT_SECRET")
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+
+# Ensure values are loaded correctly
+if not all([JWT_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD]):
+    raise ValueError("Missing environment variables! Check Render settings.")
+
+print("Environment variables loaded successfully!")
 # Validate required environment variables
 if not all([FIREBASE_CREDENTIALS_PATH, JWT_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD]):
     raise ValueError("Missing required environment variables. Please check your .env file.")
