@@ -945,6 +945,196 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Admin Panel Responsive Styles */
+        @media (max-width: 768px) {
+            .admin-panel {
+                padding: 20px 10px;
+            }
+
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .admin-card {
+                padding: 15px;
+                overflow-x: auto;
+            }
+
+            /* Table Responsive Design */
+            .admin-table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 0 -15px;
+                padding: 0 15px;
+            }
+
+            table {
+                min-width: 600px; /* Minimum width to ensure readability */
+                margin-bottom: 15px;
+            }
+
+            th, td {
+                padding: 8px 10px;
+                font-size: 14px;
+                white-space: nowrap;
+            }
+
+            .action-btn {
+                padding: 4px 8px;
+                font-size: 12px;
+            }
+
+            /* Form Controls in Admin */
+            .admin-card input[type="number"],
+            .admin-card input[type="text"] {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .admin-card .form-row {
+                flex-direction: column;
+            }
+
+            .admin-card .form-group {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            /* Availability Checkboxes */
+            .admin-card label {
+                color: var(--light);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 15px;
+                font-size: 0.9rem;
+            }
+
+            .admin-card input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
+                accent-color: var(--secondary);
+                cursor: pointer;
+            }
+
+            .admin-card input[type="checkbox"]:hover {
+                opacity: 0.8;
+            }
+
+            .admin-card h3 {
+                color: var(--light);
+                margin-bottom: 20px;
+                font-size: 1.5rem;
+                letter-spacing: 1px;
+            }
+
+            .admin-card input[type="number"] {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(100, 255, 218, 0.2);
+                color: var(--light);
+                padding: 8px 12px;
+                border-radius: 4px;
+                width: 100%;
+            }
+
+            .admin-card input[type="number"]:focus {
+                border-color: var(--secondary);
+                outline: none;
+                box-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
+            }
+
+            .admin-card .form-group label {
+                color: var(--light);
+                margin-bottom: 8px;
+                display: block;
+            }
+        }
+
+        /* Update the admin table structure */
+        .admin-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            background: var(--card-bg);
+            border-radius: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        /* Add horizontal scroll indicator */
+        .scroll-indicator {
+            display: none;
+            text-align: center;
+            color: var(--secondary);
+            font-size: 12px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .scroll-indicator {
+                display: block;
+            }
+        }
+
+        /* Setup Availability Specific Styles */
+        #availabilityForm {
+            color: var(--light);
+        }
+
+        #availabilityForm .form-group {
+            margin-bottom: 15px;
+        }
+
+        #availabilityForm label {
+            color: var(--light) !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        #availabilityForm label:hover {
+            opacity: 0.8;
+        }
+
+        #availabilityForm input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--secondary);
+            cursor: pointer;
+        }
+
+        .admin-card h3 {
+            color: var(--light) !important;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Update button style */
+        #availabilityForm .btn {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            padding: 12px 30px;
+            margin-top: 20px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        #availabilityForm .btn:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -1275,49 +1465,54 @@
             
             <div class="admin-card">
                 <h3>Today's Bookings</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Customer</th>
-                            <th>Setup</th>
-                            <th>Date/Time</th>
-                            <th>Duration</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Sample booking data - in real app this would come from database -->
-                        <tr>
-                            <td>#1001</td>
-                            <td>Rahul Sharma</td>
-                            <td>PS5 Team</td>
-                            <td>15 Oct, 2:00 PM</td>
-                            <td>2 hours</td>
-                            <td>₹400</td>
-                            <td>Confirmed</td>
-                            <td>
-                                <button class="action-btn edit-btn">Edit</button>
-                                <button class="action-btn delete-btn">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#1002</td>
-                            <td>Priya Patel</td>
-                            <td>Racing Sim</td>
-                            <td>15 Oct, 4:00 PM</td>
-                            <td>1 hour</td>
-                            <td>₹150</td>
-                            <td>Confirmed</td>
-                            <td>
-                                <button class="action-btn edit-btn">Edit</button>
-                                <button class="action-btn delete-btn">Cancel</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="scroll-indicator">
+                    <i class="fas fa-arrows-left-right"></i> Scroll horizontally to view more
+                </div>
+                <div class="admin-table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Setup</th>
+                                <th>Date/Time</th>
+                                <th>Duration</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Sample booking data - in real app this would come from database -->
+                            <tr>
+                                <td>#1001</td>
+                                <td>Rahul Sharma</td>
+                                <td>PS5 Team</td>
+                                <td>15 Oct, 2:00 PM</td>
+                                <td>2 hours</td>
+                                <td>₹400</td>
+                                <td>Confirmed</td>
+                                <td>
+                                    <button class="action-btn edit-btn">Edit</button>
+                                    <button class="action-btn delete-btn">Cancel</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#1002</td>
+                                <td>Priya Patel</td>
+                                <td>Racing Sim</td>
+                                <td>15 Oct, 4:00 PM</td>
+                                <td>1 hour</td>
+                                <td>₹150</td>
+                                <td>Confirmed</td>
+                                <td>
+                                    <button class="action-btn edit-btn">Edit</button>
+                                    <button class="action-btn delete-btn">Cancel</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             
             <div class="admin-card">
