@@ -8,3 +8,5 @@ requests==2.26.0
 urllib3==1.26.6
 charset-normalizer==2.0.12
 chardet==4.0.0 
+gunicorn
+werkzeug=2.0.0
