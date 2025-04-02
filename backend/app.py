@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import firebase_admin
-from firebase_admin import credentials, firestore, auth, initialize_app
+from firebase_admin import credentials, firestore, auth
 from datetime import datetime, timedelta
 import json
 import os
@@ -16,36 +16,31 @@ load_dotenv()
 # Initialize Flask app
 app = Flask(__name__, static_folder='../', static_url_path='')
 CORS(app)
-firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
 
-if firebase_credentials:
-    cred_dict = json.loads(firebase_credentials)
-    cred = credentials.Certificate(cred_dict)
-    firebase_admin.initialize_app(cred)
-else:
-    raise FileNotFoundError("Firebase credentials not found in environment variables")
-
+# Retrieve environment variables
+FIREBASE_CREDENTIALS = os.getenv("FIREBASE_CREDENTIALS")
 JWT_SECRET = os.getenv("JWT_SECRET")
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 
-# Ensure values are loaded correctly
-if not all([JWT_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD]):
-    raise ValueError("Missing environment variables! Check Render settings.")
+# Ensure all required environment variables are set
+if not all([FIREBASE_CREDENTIALS, JWT_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD]):
+    raise ValueError("Missing required environment variables! Check your Render settings.")
 
-print("Environment variables loaded successfully!")
-# Validate required environment variables
-if not all([FIREBASE_CREDENTIALS_PATH, JWT_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD]):
-    raise ValueError("Missing required environment variables. Please check your .env file.")
+print("✅ Environment variables loaded successfully!")
 
 # Initialize Firebase
 try:
-    cred = credentials.Certificate(FIREBASE_CREDENTIALS_PATH)
+    cred_dict = json.loads(FIREBASE_CREDENTIALS)  # Convert JSON string to dictionary
+    cred = credentials.Certificate(cred_dict)
     firebase_admin.initialize_app(cred)
     db = firestore.client()
+    print("✅ Firebase initialized successfully!")
+except json.JSONDecodeError as e:
+    raise ValueError("❌ Invalid JSON format in FIREBASE_CREDENTIALS") from e
 except Exception as e:
-    print(f"Error initializing Firebase: {str(e)}")
-    raise
+    raise RuntimeError(f"❌ Firebase initialization failed: {str(e)}") from e
+
 
 # Admin Authentication Decorator
 def admin_required(f):
