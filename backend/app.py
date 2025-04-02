@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import firebase_admin
-from firebase_admin import credentials, firestore, auth
+from firebase_admin import credentials, firestore, auth, initialize_app
 from datetime import datetime, timedelta
 import json
 import os
@@ -16,13 +16,12 @@ load_dotenv()
 # Initialize Flask app
 app = Flask(__name__, static_folder='../', static_url_path='')
 CORS(app)
-
 firebase_credentials = os.getenv("FIREBASE_CREDENTIALS")
 
 if firebase_credentials:
-    cred_dict = json.loads(firebase_credentials)  # Convert string back to JSON
-    cred = credentials.Certificate(cred_dict)  # Load as Firebase credentials
-    initialize_app(cred)
+    cred_dict = json.loads(firebase_credentials)
+    cred = credentials.Certificate(cred_dict)
+    firebase_admin.initialize_app(cred)
 else:
     raise FileNotFoundError("Firebase credentials not found in environment variables")
 
