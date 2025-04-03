@@ -1910,7 +1910,7 @@
         // API Base URL Configuration
         const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
             ? 'http://127.0.0.1:5000/api'  // Development
-            : '/api';  // Production (relative URL when hosted on same domain)
+            : 'https://squadv1.onrender.com/api';  // Production (Render domain)
 
         // Function to show notifications
         function showNotification(message, isError = false) {

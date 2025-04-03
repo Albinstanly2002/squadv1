@@ -17,7 +17,12 @@ load_dotenv()
 app = Flask(__name__, static_folder='../', static_url_path='')
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["http://localhost:5000", "http://127.0.0.1:5000", "https://*.onrender.com"],
+        "origins": [
+            "http://localhost:5000", 
+            "http://127.0.0.1:5000", 
+            "https://squadv1.onrender.com",
+            "https://*.onrender.com"
+        ],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"],
         "supports_credentials": True,
@@ -717,4 +722,5 @@ def delete_user_booking(booking_id):
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port) 
