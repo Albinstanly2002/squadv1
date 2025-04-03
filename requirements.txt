@@ -10,3 +10,4 @@ charset-normalizer==2.0.12
 chardet==4.0.0 
 gunicorn
 werkzeug==2.0.0
+gevent
