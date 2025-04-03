@@ -15,7 +15,15 @@ load_dotenv()
 
 # Initialize Flask app
 app = Flask(__name__, static_folder='../', static_url_path='')
-CORS(app)
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["http://localhost:5000", "http://127.0.0.1:5000", "https://*.onrender.com"],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": True,
+        "max_age": 3600
+    }
+})
 
 # Retrieve environment variables
 FIREBASE_CREDENTIALS = os.getenv("FIREBASE_CREDENTIALS")
